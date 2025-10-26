@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Negozio Online</title>
+<style>
+  @font-face { font-family: 'LosAngelesTimes'; src: url('fonts/LosAngelesTimes.woff2') format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Muddled'; src: url('fonts/Muddled.woff2') format('woff2'); font-display: swap; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: white;
+    font-family: 'Muddled', sans-serif;
+  }
+
+  /* Slider rosso scuro */
+  .scroll-banner {
+    width: 100%;
+    background-color: #8B0000;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .scroll-banner p {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-text 15s linear infinite;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+  }
+  @keyframes scroll-text { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+  .banner img {
+    width: 50%;
+    max-height: 1000px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+    border-radius: 0;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 40px 0 20px 0;
+  }
+
+  .divider {
+    width: 80%;
+    height: 2px;
+    background-color: rgba(255,255,255,0.8);
+    margin: 0 auto 25px auto;
+    border-radius: 2px;
+  }
+
+  .category-section {
+  background-color: #2b2b2b;
+  padding: 10px 2px; /* meno spazio ai lati */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px; /* anche meno spazio tra sezioni */
+}
+
+
+  /* Griglia 3 colonne (2 righe) */
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    justify-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .image-grid img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .image-grid img:hover { transform: scale(1.05); }
+
+  /* Modal prodotto */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center; align-items: center;
+  }
+  .modal-content {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+  }
+  .modal-content img { width: 80%; border-radius: 10px; margin-bottom: 15px; }
+  .close { color:#aaa; float:right; font-size:24px; font-weight:bold; cursor:pointer; }
+  .close:hover { color:white; }
+
+  select, button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  select:hover, button:hover { background-color: #555; }
+
+  #carrello {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 1000px;
+  }
+  #carrello ul { list-style: none; padding-left: 0; }
+  #carrello ul li { margin-bottom: 8px; display:flex; justify-content:space-between; gap:10px; align-items:center; }
+  .remove-btn { padding:6px 10px; background:#444; border-radius:6px; border:none; color:#fff; cursor:pointer; }
+  .remove-btn:hover { background:#666; }
+
+  footer {
+    background-color: #2b2b2b;
+    padding: 15px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  footer a { color: white; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* responsive small screens */
+  @media (max-width:720px) {
+    .image-grid { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
+    .image-grid img { width: 180px; height:180px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Slider rosso scuro -->
+<div class="scroll-banner">
+  <p>spedizione gratuita per ordini maggiori a 300€ &nbsp;&nbsp;nuovo drop</p>
+</div>
+
+<!-- Banner immagine -->
+<div class="banner">
+  <img src="https://recensiamomusica.com/wp-content/uploads/2025/03/Artie-5ive.jpeg" alt="Banner">
+</div>
+
+<!-- Categoria T-shirt -->
+<div class="category-section">
+  <h2>T-shirt</h2>
+  <div class="divider"></div>
+  <div class="image-grid">
+    <img src="image6.jpg" alt="T-shirt 1" data-name="ShineAndGlory tshirt" data-price="20">
+    <img src="image7.jpg" alt="T-shirt 2" data-name="Jordan tshirt" data-price="22">
+    <img src="image8.jpg" alt="T-shirt 3" data-name="Reaven tshirt" data-price="18">
+    <img src="image9.jpg" alt="T-shirt 4" data-name="Scotters tshirt" data-price="25">
+    <img src="image10.jpg" alt="T-shirt 5" data-name="Cold culture tshirt" data-price="20">
+    <img src="image11.jpg" alt="T-shirt 6" data-name="Weyz jersey" data-price="23">
+  </div>
+</div>
+
+<!-- Categoria Felpe  -->
+<div class="category-section">
+  <h2>Felpe</h2>
+  <div class="divider"></div>
+  <div class="image-grid">
+    <img src="image12.jpg" alt="Felpa 1" data-name="Scotters hoodie" data-price="55">
+    <img src="image13.jpg" alt="Felpa 2" data-name="5mc2 kab hoodie" data-price="49">
+    <img src="image14.jpg" alt="Felpa 3" data-name="Weyz zip hoodie" data-price="70">
+    <img src="image15.jpg" alt="Felpa 4" data-name="Nike nocta hoodie" data-price="50">
+    <img src="image16.jpg" alt="Felpa 5" data-name="Scuffers dark hoodie" data-price="39">
+    <img src="image17.jpg" alt="Felpa 6" data-name="Jordan x supreme hoodie" data-price="42">
+  </div>
+</div>
+
+<!-- Categoria Jeans-Pantaloni -->
+<div class="category-section">
+  <h2>Jeans-Pantaloni</h2>
+  <div class="divider"></div>
+  <div class="image-grid">
+    <img src="image18.jpg" alt="Jeans 1" data-name="Cold Culture jeans" data-price="89">
+    <img src="image19.jpg" alt="Jeans 2" data-name="Reaven Omega jeans" data-price="129">
+    <img src="image20.jpg" alt="Jeans 3" data-name="Suvene pants" data-price="35">
+    <img src="image21.jpg" alt="Jeans 4" data-name="5mc2 lab pants" data-price="79">
+    <img src="image22.jpg" alt="Jeans 5" data-name="Scuffers jeans" data-price="56">
+    <img src="image23.jpg" alt="Jeans 6" data-name="Nike vintage pants" data-price="49">
+  </div>
+</div>
+
+<!-- Categoria Giacche -->
+<div class="category-section">
+  <h2>Giacche</h2>
+  <div class="divider"></div>
+  <div class="image-grid">
+    <img src="image24.jpg" alt="Giacche 1" data-name="The north face jacket" data-price="130">
+    <img src="image25.jpg" alt="Giacche 2" data-name="Reaven jacket" data-price="189">
+    <img src="image26.jpg" alt="Giacche 3" data-name="Cold culture jacket" data-price="154">
+    <img src="image27.jpg" alt="Giacche 4" data-name="Scuffers jacket" data-price="89">
+    <img src="image28.jpg" alt="Giacche 5" data-name="Scotters jacket" data-price="119">
+    <img src="image29.jpg" alt="Giacche 6" data-name="Weyz Jacket" data-price="140">
+  </div>
+</div>
+
+<!-- Categoria Accessori -->
+<div class="category-section">
+  <h2>Accessori</h2>
+  <div class="divider"></div>
+  <div class="image-grid">
+    <img src="image36.jpg" alt="Accessorio 1" data-name="Accessorio 1" data-price="10">
+    <img src="image37.jpg" alt="Accessorio 2" data-name="Accessorio 2" data-price="15">
+    <img src="image38.jpg" alt="Accessorio 3" data-name="Accessorio 3" data-price="12">
+    <img src="image39.jpg" alt="Accessorio 4" data-name="Accessorio 4" data-price="18">
+    <img src="image40.jpg" alt="Accessorio 5" data-name="Accessorio 5" data-price="20">
+    <img src="image41.jpg" alt="Accessorio 6" data-name="Accessorio 6" data-price="25">
+  </div>
+</div>
+<!-- Carrello -->
+<div id="carrello">
+  <h2>Carrello</h2>
+  <ul id="cart-items">
+    <li>Il carrello è vuoto.</li>
+  </ul>
+  <p><strong>Totale: €<span id="total">0.00</span></strong></p>
+  <button id="checkoutBtn">Checkout</button>
+</div>
+
+<!-- Modal prodotto -->
+<div class="modal" id="productModal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <img id="modalImage" src="" alt="">
+    <h3 id="modalName"></h3>
+    <p>Prezzo: €<span id="modalPrice"></span></p>
+    <label for="taglia">Taglia:</label><br>
+    <select id="taglia">
+      <option value="S">S</option><option value="M">M</option>
+      <option value="L">L</option><option value="XL">XL</option>
+    </select><br>
+    <button id="addToCartBtn">Aggiungi al carrello</button>
+  </div>
+</div>
+
+<!-- Modal checkout -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-content">
+    <span class="close" id="closeCheckout">&times;</span>
+    <h3>Checkout</h3>
+    <form id="checkoutForm">
+      <label>Nome e cognome:</label><br>
+      <input type="text" id="nome" required style="width:90%;padding:8px;margin:8px 0;"><br>
+      <label>Indirizzo di spedizione:</label><br>
+      <input type="text" id="indirizzo" required style="width:90%;padding:8px;margin:8px 0;"><br>
+      <label>Metodo di pagamento:</label><br>
+      <select id="pagamento" required style="width:90%;padding:8px;margin:8px 0;">
+        <option value="Carta">Carta</option>
+        <option value="PayPal">PayPal</option>
+        <option value="Contrassegno">Contrassegno</option>
+      </select><br>
+      <p id="riepilogoTotale"></p>
+      <button type="submit">Conferma Ordine</button>
+    </form>
+  </div>
+</div>
+
+<!-- Messaggio finale -->
+<div class="modal" id="grazieModal">
+  <div class="modal-content">
+    <h2>GRAZIE PER AVER ORDINATO DA NOI MY G 💥</h2>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('productModal');
+  const modalImg = document.getElementById('modalImage');
+  const modalName = document.getElementById('modalName');
+  const modalPrice = document.getElementById('modalPrice');
+  const addToCartBtn = document.getElementById('addToCartBtn');
+  const closeModal = document.getElementById('closeModal');
+
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const checkoutModal = document.getElementById('checkoutModal');
+  const closeCheckout = document.getElementById('closeCheckout');
+  const riepilogoTotale = document.getElementById('riepilogoTotale');
+  const checkoutForm = document.getElementById('checkoutForm');
+  const grazieModal = document.getElementById('grazieModal');
+
+  let currentProduct = null;
+  const cart = [];
+
+  document.querySelectorAll('.image-grid img').forEach(img => {
+    img.addEventListener('click', () => {
+      modalImg.src = img.src;
+      modalName.textContent = img.dataset.name || img.alt || 'Prodotto';
+      modalPrice.textContent = img.dataset.price || '0';
+      currentProduct = { name: modalName.textContent, price: parseFloat(img.dataset.price || 0) };
+      modal.style.display = 'flex';
+    });
+  });
+
+  closeModal.onclick = () => modal.style.display = 'none';
+  closeCheckout.onclick = () => checkoutModal.style.display = 'none';
+  window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = 'none';
+    if (e.target === checkoutModal) checkoutModal.style.display = 'none';
+  };
+
+  function aggiornaCarrello() {
+    const cartItems = document.getElementById('cart-items');
+    const totalSpan = document.getElementById('total');
+    cartItems.innerHTML = '';
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<li>Il carrello è vuoto.</li>';
+      totalSpan.textContent = '0.00';
+      return;
+    }
+    let total = 0;
+    cart.forEach((item, idx) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<span>${item.name} (${item.size}) - €${item.price.toFixed(2)}</span>`;
+      const btn = document.createElement('button');
+      btn.className = 'remove-btn';
+      btn.textContent = 'Rimuovi';
+      btn.onclick = () => { cart.splice(idx,1); aggiornaCarrello(); };
+      li.appendChild(btn);
+      cartItems.appendChild(li);
+      total += item.price;
+    });
+    totalSpan.textContent = total.toFixed(2);
+  }
+
+  addToCartBtn.addEventListener('click', () => {
+    const size = document.getElementById('taglia').value;
+    if (!currentProduct) return;
+    cart.push({ ...currentProduct, size });
+    aggiornaCarrello();
+    modal.style.display = 'none';
+  });
+
+  checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) {
+      alert('Il carrello è vuoto!');
+      return;
+    }
+    let totale = cart.reduce((sum, item) => sum + item.price, 0);
+    let spedizione = totale > 300 ? 0 : 7;
+    riepilogoTotale.innerHTML = `
+      <strong>Totale prodotti:</strong> €${totale.toFixed(2)}<br>
+      <strong>Spedizione:</strong> €${spedizione.toFixed(2)}<br>
+      <strong>Totale finale:</strong> €${(totale + spedizione).toFixed(2)}
+    `;
+    checkoutModal.style.display = 'flex';
+  });
+
+  checkoutForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    checkoutModal.style.display = 'none';
+    grazieModal.style.display = 'flex';
+    setTimeout(() => {
+      grazieModal.style.display = 'none';
+      cart.length = 0;
+      aggiornaCarrello();
+    }, 3000);
+  });
+</script>
+
+</body>
+</html>
